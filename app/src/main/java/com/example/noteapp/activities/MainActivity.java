@@ -14,8 +14,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.noteapp.R;
 
 public class MainActivity extends AppCompatActivity {
-    ImageView imageViewOverlay;
+    public static final int REQUEST_CREATE_NOTE = 1;
     private long pressBacktime;
+    ImageView imgAddNote, imgAddNoteMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +28,13 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        imageViewOverlay = findViewById(R.id.imageViewOverlay);
-        imageViewOverlay.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, CreateNoteActivity.class);
-            startActivity(intent);
-        });
+        imgAddNote = findViewById(R.id.imgAddNote);
+        imgAddNoteMain = findViewById(R.id.imgAddNoteMain);
+        imgAddNote.setOnClickListener(v -> startActivityForResult(
+                new Intent(getApplicationContext(), CreateNoteActivity.class),
+                REQUEST_CREATE_NOTE));
+        imgAddNoteMain.setOnClickListener(v -> startActivityForResult(new Intent(getApplicationContext(), CreateNoteActivity.class),
+                REQUEST_CREATE_NOTE));
     }
 
     @Override

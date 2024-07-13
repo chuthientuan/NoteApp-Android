@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.noteapp.R;
 
 public class CreateNoteActivity extends AppCompatActivity {
-    ImageView icon_back, icon_tick;
+    ImageView iconBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +24,7 @@ public class CreateNoteActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        icon_back = findViewById(R.id.icon_back);
-        icon_tick = findViewById(R.id.icon_tick);
-        icon_back.setOnClickListener(v -> finish());
+        iconBack = findViewById(R.id.iconBack);
+        iconBack.setOnClickListener(v -> finish());
     }
 }
