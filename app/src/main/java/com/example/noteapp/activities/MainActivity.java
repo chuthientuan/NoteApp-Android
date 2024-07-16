@@ -20,18 +20,24 @@ import com.example.noteapp.R;
 import com.example.noteapp.adapter.NoteAdapter;
 import com.example.noteapp.database.NotesDatabase;
 import com.example.noteapp.entities.Note;
+import com.example.noteapp.listeners.NotesListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-    public static final int REQUEST_CREATE_NOTE = 1;
+public class MainActivity extends AppCompatActivity implements NotesListener {
+    public static final int REQUEST_CODE_ADD_NOTE = 1;
+    public static final int REQUEST_CODE_UPDATE_NOTE = 2;
+    public static final int REQUEST_CODE_SHOW_NOTES = 3;
+
     private long pressBacktime;
     ImageView imgAddNote, imgAddNoteMain;
 
     private RecyclerView recyclerViewNotes;
     private List<Note> noteList;
     private NoteAdapter noteAdapter;
+
+    private int noteClickedPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,24 +53,33 @@ public class MainActivity extends AppCompatActivity {
         imgAddNoteMain = findViewById(R.id.imgAddNoteMain);
         imgAddNote.setOnClickListener(v -> startActivityForResult(
                 new Intent(getApplicationContext(), CreateNoteActivity.class),
-                REQUEST_CREATE_NOTE)
+                REQUEST_CODE_ADD_NOTE)
         );
         imgAddNoteMain.setOnClickListener(v -> startActivityForResult(
                 new Intent(getApplicationContext(), CreateNoteActivity.class),
-                REQUEST_CREATE_NOTE)
+                REQUEST_CODE_ADD_NOTE)
         );
         recyclerViewNotes = findViewById(R.id.recyclerViewNotes);
         recyclerViewNotes.setLayoutManager(
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         );
         noteList = new ArrayList<>();
-        noteAdapter = new NoteAdapter(noteList);
+        noteAdapter = new NoteAdapter(noteList, this);
         recyclerViewNotes.setAdapter(noteAdapter);
 
-        getNote();
+        getNote(REQUEST_CODE_SHOW_NOTES);
     }
 
-    private void getNote() {
+    @Override
+    public void onNoteClicked(Note note, int position) {
+        noteClickedPosition = position;
+        Intent intent = new Intent(getApplicationContext(), CreateNoteActivity.class);
+        intent.putExtra("isViewOrUpdate", true);
+        intent.putExtra("note", note);
+        startActivityForResult(intent, REQUEST_CODE_UPDATE_NOTE);
+    }
+
+    private void getNote(final int requestCode) {
         @SuppressLint("StaticFieldLeak")
         class GetNotesTask extends AsyncTask<Void, Void, List<Note>> {
             @Override
@@ -72,16 +87,22 @@ public class MainActivity extends AppCompatActivity {
                 return NotesDatabase.getDatabase(getApplicationContext()).noteDao().getAllNotes();
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             protected void onPostExecute(List<Note> notes) {
                 super.onPostExecute(notes);
-                if (noteList.size() == 0) {
+                //Add all notes from database to noteList and notify adapter
+                if (requestCode == REQUEST_CODE_SHOW_NOTES) {
                     noteList.addAll(notes);
                     noteAdapter.notifyDataSetChanged();
-                }
-                else {
+                } else if (requestCode == REQUEST_CODE_ADD_NOTE) {  //Add new note to noteList and notify adapter
                     noteList.add(0, notes.get(0));
                     noteAdapter.notifyItemInserted(0);
+                    recyclerViewNotes.smoothScrollToPosition(0);
+                } else if (requestCode == REQUEST_CODE_UPDATE_NOTE) {  //Update note in noteList and notify adapter
+                    noteList.remove(noteClickedPosition);
+                    noteList.add(noteClickedPosition, notes.get(noteClickedPosition));
+                    noteAdapter.notifyItemChanged(noteClickedPosition);
                 }
             }
         }
@@ -103,8 +124,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CREATE_NOTE && resultCode == RESULT_OK) {
-            getNote();
+        if (requestCode == REQUEST_CODE_ADD_NOTE && resultCode == RESULT_OK) {
+            getNote(REQUEST_CODE_ADD_NOTE);
+        } else if (requestCode == REQUEST_CODE_UPDATE_NOTE && resultCode == RESULT_OK) {
+            if (data != null) {
+                getNote(REQUEST_CODE_UPDATE_NOTE);
+            }
         }
     }
 }
