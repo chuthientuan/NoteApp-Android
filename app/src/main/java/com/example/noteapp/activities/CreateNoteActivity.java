@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +44,6 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.regex.Pattern;
 
 public class CreateNoteActivity extends AppCompatActivity {
      private EditText inputNoteTitle, inputNoteSubTitle, inputNote;
@@ -101,6 +99,18 @@ public class CreateNoteActivity extends AppCompatActivity {
             setViewOrUpdateNote();
         }
 
+        findViewById(R.id.imgRemoveWebURL).setOnClickListener(v -> {
+            textWebURL.setText(null);
+            layoutWebURL.setVisibility(View.GONE);
+        });
+
+        findViewById(R.id.imgRemoveImage).setOnClickListener(v -> {
+            imgNote.setImageBitmap(null);
+            imgNote.setVisibility(View.GONE);
+            findViewById(R.id.imgRemoveImage).setVisibility(View.GONE);
+            selectedImagePath = "";
+        });
+
         initMiscellaneous();
         setSubTitleIndicatorColor();
     }
@@ -113,6 +123,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         if (alreadyAvailableNote.getImagePath() != null && !alreadyAvailableNote.getImagePath().trim().isEmpty()) {
             imgNote.setImageBitmap(BitmapFactory.decodeFile(alreadyAvailableNote.getImagePath()));
             imgNote.setVisibility(View.VISIBLE);
+            findViewById(R.id.imgRemoveImage).setVisibility(View.VISIBLE);
             selectedImagePath = alreadyAvailableNote.getImagePath();
         }
 
@@ -310,6 +321,7 @@ public class CreateNoteActivity extends AppCompatActivity {
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                         imgNote.setImageBitmap(bitmap);
                         imgNote.setVisibility(View.VISIBLE);
+                        findViewById(R.id.imgRemoveImage).setVisibility(View.VISIBLE);
 
                         selectedImagePath = getPathFromUri(selectedImageUri);
                     } catch (Exception e) {
