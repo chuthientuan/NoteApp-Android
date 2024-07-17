@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements NotesListener {
         noteAdapter = new NoteAdapter(noteList, this);
         recyclerViewNotes.setAdapter(noteAdapter);
 
-        getNote(REQUEST_CODE_SHOW_NOTES);
+        getNote(REQUEST_CODE_SHOW_NOTES, false);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NotesListener {
         startActivityForResult(intent, REQUEST_CODE_UPDATE_NOTE);
     }
 
-    private void getNote(final int requestCode) {
+    private void getNote(final int requestCode, final boolean isNoteDelete) {
         @SuppressLint("StaticFieldLeak")
         class GetNotesTask extends AsyncTask<Void, Void, List<Note>> {
             @Override
@@ -101,8 +101,13 @@ public class MainActivity extends AppCompatActivity implements NotesListener {
                     recyclerViewNotes.smoothScrollToPosition(0);
                 } else if (requestCode == REQUEST_CODE_UPDATE_NOTE) {  //Update note in noteList and notify adapter
                     noteList.remove(noteClickedPosition);
-                    noteList.add(noteClickedPosition, notes.get(noteClickedPosition));
-                    noteAdapter.notifyItemChanged(noteClickedPosition);
+                    if (isNoteDelete) {
+                        noteAdapter.notifyItemRemoved(noteClickedPosition);
+                    }
+                    else {
+                        noteList.add(noteClickedPosition, notes.get(noteClickedPosition));
+                        noteAdapter.notifyItemChanged(noteClickedPosition);
+                    }
                 }
             }
         }
@@ -125,10 +130,10 @@ public class MainActivity extends AppCompatActivity implements NotesListener {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_ADD_NOTE && resultCode == RESULT_OK) {
-            getNote(REQUEST_CODE_ADD_NOTE);
+            getNote(REQUEST_CODE_ADD_NOTE, false);
         } else if (requestCode == REQUEST_CODE_UPDATE_NOTE && resultCode == RESULT_OK) {
             if (data != null) {
-                getNote(REQUEST_CODE_UPDATE_NOTE);
+                getNote(REQUEST_CODE_UPDATE_NOTE, data.getBooleanExtra("isNoteDelete", false));
             }
         }
     }
