@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:layout_margin="@dimen/_10sdp"
     android:background="@drawable/background_dialog">
-    
+
     <ImageView
         android:id="@+id/imageAddUrl"
         android:layout_width="@dimen/_25sdp"
@@ -16,9 +16,10 @@
         android:layout_marginTop="@dimen/_8sdp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/ic_web_link"
-        app:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -31,7 +32,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageAddUrl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageAddUrl"
-        app:layout_constraintTop_toTopOf="@+id/imageAddUrl"/>
+        app:layout_constraintTop_toTopOf="@+id/imageAddUrl" />
+
     <EditText
         android:id="@+id/inputURL"
         android:layout_width="match_parent"
@@ -51,7 +53,8 @@
         android:textColor="@color/white"
         android:textColorHint="@color/colorTextHint"
         android:textSize="@dimen/_13ssp"
-        app:layout_constraintTop_toBottomOf="@+id/imageAddUrl"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageAddUrl" />
+
     <TextView
         android:id="@+id/textAdd"
         android:layout_width="wrap_content"
@@ -65,7 +68,8 @@
         android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputURL"/>
+        app:layout_constraintTop_toBottomOf="@+id/inputURL" />
+
     <TextView
         android:id="@+id/textCancel"
         android:layout_width="wrap_content"
@@ -79,6 +83,6 @@
         android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textAdd"
-        app:layout_constraintTop_toBottomOf="@+id/inputURL"/>
+        app:layout_constraintTop_toBottomOf="@+id/inputURL" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

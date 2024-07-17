@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -68,6 +71,26 @@ public class MainActivity extends AppCompatActivity implements NotesListener {
         recyclerViewNotes.setAdapter(noteAdapter);
 
         getNote(REQUEST_CODE_SHOW_NOTES, false);
+
+        EditText inputSearch = findViewById(R.id.inputSearch);
+        inputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                noteAdapter.cancelTimer();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!noteList.isEmpty()) {
+                    noteAdapter.searchNotes(s.toString());
+                }
+            }
+        });
     }
 
     @Override
@@ -103,8 +126,7 @@ public class MainActivity extends AppCompatActivity implements NotesListener {
                     noteList.remove(noteClickedPosition);
                     if (isNoteDelete) {
                         noteAdapter.notifyItemRemoved(noteClickedPosition);
-                    }
-                    else {
+                    } else {
                         noteList.add(noteClickedPosition, notes.get(noteClickedPosition));
                         noteAdapter.notifyItemChanged(noteClickedPosition);
                     }
@@ -119,8 +141,7 @@ public class MainActivity extends AppCompatActivity implements NotesListener {
         if (System.currentTimeMillis() - pressBacktime < 2000) {
             super.onBackPressed();
             return;
-        }
-        else {
+        } else {
             Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
         }
         pressBacktime = System.currentTimeMillis();

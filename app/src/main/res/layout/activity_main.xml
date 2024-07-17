@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -13,14 +12,14 @@
         android:id="@+id/textMyNotes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/my_notes"
-        android:textSize="@dimen/_20ssp"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:includeFontPadding="false"
-        android:textStyle="bold"
+        android:text="@string/my_notes"
         android:textColor="@color/white"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
@@ -40,8 +39,8 @@
         <ImageView
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_search"
             android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_search"
             app:tint="@color/colorSearchIcon" />
 
         <EditText
@@ -57,7 +56,7 @@
             android:inputType="text"
             android:textColor="@color/white"
             android:textColorHint="@color/colorTextHint"
-            android:textSize="@dimen/_13ssp"/>
+            android:textSize="@dimen/_13ssp" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -69,45 +68,45 @@
         android:paddingEnd="@dimen/_12sdp"
         android:paddingBottom="@dimen/_12sdp"
         app:layout_constraintBottom_toTopOf="@id/layoutQuickAction"
-        app:layout_constraintTop_toBottomOf="@id/layoutSearch"/>
+        app:layout_constraintTop_toBottomOf="@id/layoutSearch" />
 
     <LinearLayout
         android:id="@+id/layoutQuickAction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorQuickActionBackground"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="@dimen/_15sdp"
         app:layout_constraintBottom_toBottomOf="parent">
-        
+
         <ImageView
             android:id="@+id/imgAddNote"
             android:layout_width="@dimen/_23sdp"
             android:layout_height="@dimen/_23sdp"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/ic_add_outline"
-            app:tint="@color/colorIcons"
-            android:contentDescription="@string/app_name"/>
+            app:tint="@color/colorIcons" />
 
         <ImageView
             android:id="@+id/imgAddImg"
             android:layout_width="@dimen/_23sdp"
             android:layout_height="@dimen/_23sdp"
-            android:src="@drawable/ic_image"
             android:layout_marginStart="@dimen/_15sdp"
-            app:tint="@color/colorIcons"
-            android:contentDescription="@string/app_name"/>
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_image"
+            app:tint="@color/colorIcons" />
 
         <ImageView
             android:id="@+id/imgAddWebLink"
             android:layout_width="@dimen/_23sdp"
             android:layout_height="@dimen/_23sdp"
-            android:src="@drawable/ic_web_link"
             android:layout_marginStart="@dimen/_15sdp"
-            app:tint="@color/colorIcons"
-            android:contentDescription="@string/app_name"/>
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_web_link"
+            app:tint="@color/colorIcons" />
     </LinearLayout>
-    
+
     <ImageView
         android:id="@+id/imgAddNoteMain"
         android:layout_width="@dimen/_40sdp"
@@ -117,9 +116,9 @@
         android:contentDescription="@string/app_name"
         android:padding="@dimen/_5sdp"
         android:src="@drawable/ic_add"
-        app:tint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@id/layoutQuickAction"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/layoutQuickAction"/>
+        app:layout_constraintTop_toTopOf="@id/layoutQuickAction"
+        app:tint="@color/colorPrimary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

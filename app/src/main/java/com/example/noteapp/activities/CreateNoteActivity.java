@@ -46,21 +46,21 @@ import java.util.Date;
 import java.util.Locale;
 
 public class CreateNoteActivity extends AppCompatActivity {
-     private EditText inputNoteTitle, inputNoteSubTitle, inputNote;
-     private TextView textDateTime, textWebURL;
-     private View viewSubtitleIndicator;
-     private ImageView imgNote;
-     private LinearLayout layoutWebURL;
+    private EditText inputNoteTitle, inputNoteSubTitle, inputNote;
+    private TextView textDateTime, textWebURL;
+    private View viewSubtitleIndicator;
+    private ImageView imgNote;
+    private LinearLayout layoutWebURL;
 
-     private AlertDialog dialogAddURL;
-     private AlertDialog dialogDeleteNote;
-     private Note alreadyAvailableNote;
+    private AlertDialog dialogAddURL;
+    private AlertDialog dialogDeleteNote;
+    private Note alreadyAvailableNote;
 
-     private String selectNoteColor;
-     private String selectedImagePath;
+    private String selectNoteColor;
+    private String selectedImagePath;
 
-     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
-     private static final int REQUEST_CODE_SELECT_IMAGE = 2;
+    private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
+    private static final int REQUEST_CODE_SELECT_IMAGE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,8 +138,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         if (inputNoteTitle.getText().toString().trim().isEmpty()) {
             Toast.makeText(this, "Note title can't be empty", Toast.LENGTH_SHORT).show();
             return;
-        }
-        else if (inputNoteSubTitle.getText().toString().trim().isEmpty()
+        } else if (inputNoteSubTitle.getText().toString().trim().isEmpty()
                 && inputNote.getText().toString().trim().isEmpty()) {
             Toast.makeText(this, "Note can't be empty", Toast.LENGTH_SHORT).show();
             return;
@@ -268,12 +267,11 @@ public class CreateNoteActivity extends AppCompatActivity {
             //Requesting runtime Storage Permission
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
+                    != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(
                         CreateNoteActivity.this,
-                        new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
-            }
-            else {
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
+            } else {
                 selectImage();
             }
         });
@@ -385,8 +383,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         Cursor cursor = getContentResolver().query(uri, null, null, null, null);
         if (cursor == null) {
             filePath = uri.getPath();
-        }
-        else {
+        } else {
             cursor.moveToFirst();
             int index = cursor.getColumnIndex("_data");
             filePath = cursor.getString(index);
@@ -415,8 +412,7 @@ public class CreateNoteActivity extends AppCompatActivity {
             view.findViewById(R.id.textAdd).setOnClickListener(v -> {
                 if (inputURL.getText().toString().trim().isEmpty()) {
                     Toast.makeText(this, "Enter URL", Toast.LENGTH_SHORT).show();
-                }
-                else if (!Patterns.WEB_URL.matcher(inputURL.getText().toString()).matches()) {
+                } else if (!Patterns.WEB_URL.matcher(inputURL.getText().toString()).matches()) {
                     Toast.makeText(this, "Enter valid URL", Toast.LENGTH_SHORT).show();
                 } else {
                     textWebURL.setText(inputURL.getText().toString());
