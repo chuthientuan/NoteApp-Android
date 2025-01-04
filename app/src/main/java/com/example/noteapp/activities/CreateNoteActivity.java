@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Patterns;
@@ -46,21 +47,18 @@ import java.util.Date;
 import java.util.Locale;
 
 public class CreateNoteActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
+    private static final int REQUEST_CODE_SELECT_IMAGE = 2;
     private EditText inputNoteTitle, inputNoteSubTitle, inputNote;
     private TextView textDateTime, textWebURL;
     private View viewSubtitleIndicator;
     private ImageView imgNote;
     private LinearLayout layoutWebURL;
-
     private AlertDialog dialogAddURL;
     private AlertDialog dialogDeleteNote;
     private Note alreadyAvailableNote;
-
     private String selectNoteColor;
     private String selectedImagePath;
-
-    private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
-    private static final int REQUEST_CODE_SELECT_IMAGE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -281,11 +279,17 @@ public class CreateNoteActivity extends AppCompatActivity {
         layoutMiscellaneous.findViewById(R.id.layoutAddImage).setOnClickListener(v -> {
             //Requesting runtime Storage Permission
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_MEDIA_IMAGES)
                     != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(
-                        CreateNoteActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    ActivityCompat.requestPermissions(
+                            CreateNoteActivity.this,
+                            new String[]{Manifest.permission.READ_MEDIA_IMAGES}, REQUEST_CODE_STORAGE_PERMISSION);
+                } else {
+                    ActivityCompat.requestPermissions(
+                            CreateNoteActivity.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
+                }
             } else {
                 selectImage();
             }
