@@ -65,46 +65,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         return position;
     }
 
-    static class NoteViewHolder extends RecyclerView.ViewHolder {
-        TextView textTitle, textSubTitle, textDateTime;
-        LinearLayout layoutNote;
-        RoundedImageView imageNote;
-
-        public NoteViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textTitle = itemView.findViewById(R.id.textTitle);
-            textSubTitle = itemView.findViewById(R.id.textSubTitle);
-            textDateTime = itemView.findViewById(R.id.textDateTime);
-            layoutNote = itemView.findViewById(R.id.layoutNote);
-            imageNote = itemView.findViewById(R.id.imageNote);
-        }
-
-        void setNote(Note note) {
-            textTitle.setText(note.getTitle());
-            if (note.getSubtitle().trim().isEmpty()) {
-                textSubTitle.setVisibility(View.GONE);
-            }
-            else {
-                textSubTitle.setText(note.getSubtitle());
-            }
-            textDateTime.setText(note.getDateTime());
-
-            GradientDrawable gradientDrawable = (GradientDrawable) layoutNote.getBackground();
-            if (note.getColor() != null) {
-                gradientDrawable.setColor(Color.parseColor(note.getColor()));
-            } else {
-                gradientDrawable.setColor(Color.parseColor("#333333"));
-            }
-
-            if (note.getImagePath() != null) {
-                imageNote.setImageBitmap(BitmapFactory.decodeFile(note.getImagePath()));
-                imageNote.setVisibility(View.VISIBLE);
-            } else {
-                imageNote.setVisibility(View.GONE);
-            }
-        }
-    }
-
     public void searchNotes(final String searchKeyword) {
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -112,8 +72,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             public void run() {
                 if (searchKeyword.trim().isEmpty()) {
                     notes = notesSource;
-                }
-                else {
+                } else {
                     ArrayList<Note> temp = new ArrayList<>();
                     for (Note note : notesSource) {
                         if (note.getTitle().toLowerCase().contains(searchKeyword.toLowerCase())
@@ -138,6 +97,45 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     public void cancelTimer() {
         if (timer != null) {
             timer.cancel();
+        }
+    }
+
+    static class NoteViewHolder extends RecyclerView.ViewHolder {
+        TextView textTitle, textSubTitle, textDateTime;
+        LinearLayout layoutNote;
+        RoundedImageView imageNote;
+
+        public NoteViewHolder(@NonNull View itemView) {
+            super(itemView);
+            textTitle = itemView.findViewById(R.id.textTitle);
+            textSubTitle = itemView.findViewById(R.id.textSubTitle);
+            textDateTime = itemView.findViewById(R.id.textDateTime);
+            layoutNote = itemView.findViewById(R.id.layoutNote);
+            imageNote = itemView.findViewById(R.id.imageNote);
+        }
+
+        void setNote(Note note) {
+            textTitle.setText(note.getTitle());
+            if (note.getSubtitle().trim().isEmpty()) {
+                textSubTitle.setVisibility(View.GONE);
+            } else {
+                textSubTitle.setText(note.getSubtitle());
+            }
+            textDateTime.setText(note.getDateTime());
+
+            GradientDrawable gradientDrawable = (GradientDrawable) layoutNote.getBackground();
+            if (note.getColor() != null) {
+                gradientDrawable.setColor(Color.parseColor(note.getColor()));
+            } else {
+                gradientDrawable.setColor(Color.parseColor("#333333"));
+            }
+
+            if (note.getImagePath() != null) {
+                imageNote.setImageBitmap(BitmapFactory.decodeFile(note.getImagePath()));
+                imageNote.setVisibility(View.VISIBLE);
+            } else {
+                imageNote.setVisibility(View.GONE);
+            }
         }
     }
 }
