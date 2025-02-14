@@ -90,7 +90,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         ImageView iconSave = findViewById(R.id.iconSave);
         iconSave.setOnClickListener(v -> saveNote());
 
-        selectNoteColor = "#333333";  //Default note color
+        selectNoteColor = String.valueOf(R.color.colorDefaultNoteColor);  //Default note color
         selectedImagePath = "";
 
         if (getIntent().getBooleanExtra("isViewOrUpdate", false)) {
@@ -210,7 +210,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         imgColor4 = findViewById(R.id.imgColor4);
         imgColor5 = findViewById(R.id.imgColor5);
         layoutMiscellaneous.findViewById(R.id.viewColor1).setOnClickListener(v -> {
-            selectNoteColor = "#333333";
+            selectNoteColor = String.valueOf(R.color.colorSearchBackground);
             imgColor1.setImageResource(R.drawable.ic_done);
             imgColor2.setImageResource(0);
             imgColor3.setImageResource(0);
@@ -220,7 +220,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         });
 
         layoutMiscellaneous.findViewById(R.id.viewColor2).setOnClickListener(v -> {
-            selectNoteColor = "#FDBE3B";
+            selectNoteColor = String.valueOf(R.color.colorNoteColor2);
             imgColor1.setImageResource(0);
             imgColor2.setImageResource(R.drawable.ic_done);
             imgColor3.setImageResource(0);
@@ -230,7 +230,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         });
 
         layoutMiscellaneous.findViewById(R.id.viewColor3).setOnClickListener(v -> {
-            selectNoteColor = "#FF4842";
+            selectNoteColor = String.valueOf(R.color.colorNoteColor3);
             imgColor1.setImageResource(0);
             imgColor2.setImageResource(0);
             imgColor3.setImageResource(R.drawable.ic_done);
@@ -240,7 +240,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         });
 
         layoutMiscellaneous.findViewById(R.id.viewColor4).setOnClickListener(v -> {
-            selectNoteColor = "#3A52Fc";
+            selectNoteColor = String.valueOf(R.color.colorNoteColor4);
             imgColor1.setImageResource(0);
             imgColor2.setImageResource(0);
             imgColor3.setImageResource(0);
@@ -250,7 +250,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         });
 
         layoutMiscellaneous.findViewById(R.id.viewColor5).setOnClickListener(v -> {
-            selectNoteColor = "#000000";
+            selectNoteColor = String.valueOf(R.color.colorNoteColor5);
             imgColor1.setImageResource(0);
             imgColor2.setImageResource(0);
             imgColor3.setImageResource(0);
