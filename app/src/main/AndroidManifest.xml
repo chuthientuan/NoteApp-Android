@@ -8,10 +8,10 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/notes_icon_crop"
+        android:icon="@mipmap/ic_launcher_foreground"
         android:label="Note"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@drawable/bg_splash"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoteApp"
         tools:targetApi="31">
