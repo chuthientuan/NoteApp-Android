@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="?attr/backgroundColor"
     tools:context=".activities.MainActivity">
 
     <TextView
@@ -17,7 +17,7 @@
         android:layout_marginEnd="@dimen/_12sdp"
         android:includeFontPadding="false"
         android:text="@string/my_notes"
-        android:textColor="@color/white"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +41,7 @@
             android:layout_height="@dimen/_20sdp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_search"
-            app:tint="@color/colorSearchIcon" />
+            app:tint="@color/colorTextHint" />
 
         <EditText
             android:id="@+id/inputSearch"
@@ -74,7 +74,7 @@
         android:id="@+id/layoutQuickAction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorQuickActionBackground"
+        android:background="?attr/color"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="@dimen/_15sdp"
@@ -86,7 +86,7 @@
             android:layout_height="@dimen/_23sdp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_add_outline"
-            app:tint="@color/colorIcons" />
+            app:tint="@color/colorTextHint" />
 
         <ImageView
             android:id="@+id/imgAddImg"
@@ -95,7 +95,7 @@
             android:layout_marginStart="@dimen/_15sdp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_image"
-            app:tint="@color/colorIcons" />
+            app:tint="@color/colorTextHint" />
 
         <ImageView
             android:id="@+id/imgAddWebLink"
@@ -104,7 +104,7 @@
             android:layout_marginStart="@dimen/_15sdp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_web_link"
-            app:tint="@color/colorIcons" />
+            app:tint="@color/colorTextHint" />
     </LinearLayout>
 
     <ImageView
@@ -119,6 +119,6 @@
         app:layout_constraintBottom_toTopOf="@id/layoutQuickAction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/layoutQuickAction"
-        app:tint="@color/colorPrimary" />
+        app:tint="@color/colorPrimaryLight" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="?attr/backgroundColor"
     tools:context=".activities.CreateNoteActivity">
 
     <ScrollView
@@ -60,7 +60,7 @@
                 android:importantForAutofill="no"
                 android:includeFontPadding="false"
                 android:inputType="text"
-                android:textColor="@color/white"
+                android:textColor="?attr/colorOnPrimary"
                 android:textColorHint="@color/colorTextHint"
                 android:textSize="@dimen/_16ssp"
                 app:layout_constraintTop_toBottomOf="@id/iconBack" />
@@ -89,7 +89,7 @@
                 android:includeFontPadding="false"
                 android:inputType="textMultiLine"
                 android:paddingTop="@dimen/_8sdp"
-                android:textColor="@color/colorTextSubtitle"
+                android:textColor="?attr/colorOnPrimary"
                 android:textColorHint="@color/colorTextHint"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -179,7 +179,7 @@
                 android:includeFontPadding="false"
                 android:inputType="textMultiLine"
                 android:minHeight="@dimen/_100sdp"
-                android:textColor="@color/white"
+                android:textColor="?attr/colorOnPrimary"
                 android:textColorHint="@color/colorTextHint"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
