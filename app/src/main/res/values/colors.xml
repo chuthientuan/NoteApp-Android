@@ -3,20 +3,39 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#292929</color>
-    <color name="colorPrimaryDark">#292929</color>
     <color name="colorAccent">#FDBE3B</color>
     <color name="colorSearchIcon">#DBDBDB</color>
     <color name="colorTextHint">#7B7B7B</color>
-    <color name="colorQuickActionBackground">#2F2D2E</color>
-    <color name="colorIcons">#A4A4A4</color>
     <color name="colorTextSubtitle">#CECECE</color>
     <color name="colorDefaultNoteColor">#333333</color>
     <color name="colorNoteSubtitleText">#FAFAFA</color>
-    <color name="colorMiscellaneousBackground">#1F1F1F</color>
-    <color name="colorDelete">#FF4842</color>
+
     <color name="colorSearchBackground">#333333</color>
     <color name="colorNoteColor2">#FDBE3B</color>
     <color name="colorNoteColor3">#FF4842</color>
     <color name="colorNoteColor4">#3A52Fc</color>
     <color name="colorNoteColor5">#000000</color>
+
+    <!-- Màu giao diện tối -->
+    <color name="colorPrimaryDark">#292929</color>
+    <color name="colorAccentDark">#FDBE3B</color>
+    <color name="colorBackgroundDark">#292929</color>
+    <color name="colorTextDark">#E0E0E0</color>
+    <color name="colorMiscellaneousBackgroundDark">#1F1F1F</color>
+    <color name="colorSearchBackgroundDark">#333333</color>
+    <color name="colorQuickActionBackgroundDark">#2F2D2E</color>
+
+    <!-- Màu giao diện sáng -->
+    <color name="colorPrimaryLight">#FFFFCC</color>
+    <color name="colorAccentLight">#FFA500</color>
+    <color name="colorBackgroundLight">#FAFAFA</color>
+    <color name="colorMiscellaneousBackgroundLight">#CCFFCC</color>
+    <color name="colorTextLight">#212121</color>
+    <color name="colorSearchBackgroundLight">#DDDDDD</color>
+    <color name="colorQuickActionBackgroundLight">#EEEEEE</color>
+
+    <!-- Màu chung -->
+
+    <color name="colorIcons">#A4A4A4</color>
+    <color name="colorDelete">#FF4842</color>
 </resources>

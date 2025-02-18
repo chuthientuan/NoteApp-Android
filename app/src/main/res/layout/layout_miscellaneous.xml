@@ -5,7 +5,7 @@
     android:id="@+id/layoutMiscellaneous"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_miscellaneous"
+    android:background="?attr/colorAccent"
     android:orientation="vertical"
     app:behavior_peekHeight="@dimen/_40sdp"
     app:layout_behavior="@string/bottom_sheet_behavior">
@@ -17,7 +17,7 @@
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="@string/miscellaneous"
-        android:textColor="@color/white"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="@dimen/_13ssp" />
 
     <LinearLayout
